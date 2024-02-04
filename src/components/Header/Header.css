@@ -1,0 +1,13 @@
+.header {
+  padding: 20px 0;
+}
+
+.header__nav {
+  display: flex;
+  gap: 20px;
+}
+
+.header__nav a {
+  color: inherit;
+  text-decoration: none;
+}
