@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import Aside from "./Aside/Aside";
+import Todo from "./Todo/Todo";
 
 const App = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -24,17 +26,27 @@ const App = () => {
   };
 
   return (
-    <>
-      <Calendar value={currentDate} onChange={changeDate}></Calendar>;
-      <form onSubmit={setTasks}>
-        <input></input>
-        <button>Add</button>
-      </form>
-      {tasksByDate[currentDate.toDateString()] &&
-        tasksByDate[currentDate.toDateString()].map((task, index) => (
-          <div key={index}>{task}</div>
-        ))}
-    </>
+    <div className="App">
+      <div className="aside">
+        {" "}
+        <Calendar value={currentDate} onChange={changeDate}></Calendar>
+        <h3>Today's tasks: </h3>
+        <form onSubmit={setTasks}>
+          <input></input>
+          <button>Add</button>
+        </form>
+      </div>
+
+      <div className="right">
+        <h2>Список дел на {currentDate.toDateString()} число</h2>
+        <div className="todos">
+          {tasksByDate[currentDate.toDateString()] &&
+            tasksByDate[currentDate.toDateString()].map((task, index) => (
+              <Todo key={index} text={task}></Todo>
+            ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
